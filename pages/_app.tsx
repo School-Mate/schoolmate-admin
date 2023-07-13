@@ -15,6 +15,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useSWR from 'swr';
+import { swrFetcher } from '@/utils/client';
 
 
 const clientSideEmotionCache = createEmotionCache();
@@ -36,6 +38,11 @@ function TokyoApp(props: TokyoAppProps) {
   Router.events.on('routeChangeError', nProgress.done);
   Router.events.on('routeChangeComplete', nProgress.done);
 
+  try {
+    useSWR(`/admin/me`, swrFetcher);
+  } catch (error) {
+    Router.push('/');
+  }
   return (
     <>
       <CacheProvider value={emotionCache}>
