@@ -1,7 +1,7 @@
 import { VerifyRequest } from "@/models/verifyRequest";
 import { Box, Button, Card, CardHeader, Checkbox, Dialog, Divider, FormControl, IconButton, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip, Typography, useTheme } from "@mui/material";
 import React, { ChangeEvent, FC, useState, } from "react";
-import BulkActions from "./BulkActions";
+import RequestBulkActions from "./RequestBulkActions";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { Process } from "@/models/verifyRequest";
@@ -179,7 +179,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
             <Card>
                 {selectedBulkActions && (
                     <Box flex={1} p={2}>
-                        <BulkActions />
+                        <RequestBulkActions />
                     </Box>
                 )}
                 {!selectedBulkActions && (
