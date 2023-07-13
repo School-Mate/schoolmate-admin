@@ -249,7 +249,7 @@ function SidebarMenu() {
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
-              관리
+              유저 관리
             </ListSubheader>
           }
         >
@@ -264,7 +264,7 @@ function SidebarMenu() {
                     disableRipple
                     component="a"
                     onClick={closeSidebar}
-                    startIcon={<TableChartTwoToneIcon />}
+                    startIcon={<AccountCircleTwoToneIcon />}
                   >
                     학교 인증 요청
                   </Button>
@@ -277,7 +277,7 @@ function SidebarMenu() {
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
-              Accounts
+              학교 관리
             </ListSubheader>
           }
         >
@@ -292,9 +292,9 @@ function SidebarMenu() {
                     disableRipple
                     component="a"
                     onClick={closeSidebar}
-                    startIcon={<AccountCircleTwoToneIcon />}
+                    startIcon={<TableChartTwoToneIcon />}
                   >
-                    User Profile
+                    게시판 생성 요청
                   </Button>
                 </NextLink>
               </ListItem>
