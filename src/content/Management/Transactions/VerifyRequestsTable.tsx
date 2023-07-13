@@ -36,12 +36,31 @@ interface VerifyRequestsTableProps {
     verifyRequests: VerifyRequest[];
 }
 
+interface Filters {
+    process?: Process;
+}
+
 const applyPagination = (
     verifyRequests: VerifyRequest[],
     page: number,
     limit: number
 ): VerifyRequest[] => {
     return verifyRequests.slice(page * limit, page * limit + limit);
+};
+
+const applyFilters = (
+    verifyRequests: VerifyRequest[],
+    filters: Filters
+): VerifyRequest[] => {
+    return verifyRequests.filter((verifyRequest) => {
+        let matches = true;
+
+        if (filters.process && verifyRequest.process !== filters.process) {
+            matches = false;
+        }
+
+        return matches;
+    });
 };
 
 const ImageDialog = (props) => {
@@ -64,6 +83,9 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
     const [page, setPage] = useState<number>(0);
     const [limit, setLimit] = useState<number>(5);
     const [targetImage, setTargetImage] = useState<string>('');
+    const [filters, setFilters] = useState<Filters>({
+        process: null
+    });
 
     const [open, setOpen] = useState(false);
 
@@ -98,9 +120,14 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
     const handleProcessChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let value = null;
 
-        if (e.target.value === 'all') {
+        if (e.target.value !== 'all') {
             value = e.target.value;
         }
+
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            process: value
+        }));
     };
 
     const handleSelectAllVerifyRequests = (
@@ -162,7 +189,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
                                 <FormControl fullWidth variant="outlined">
                                     <InputLabel>상태</InputLabel>
                                     <Select
-                                        value={filters.process || 'pending'}
+                                        value={filters.process || 'all'}
                                         onChange={handleProcessChange}
                                         label="Status"
                                         autoWidth
@@ -315,7 +342,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
                 <Box p={2}>
                     <TablePagination
                         component="div"
-                        count={verifyRequests.length}
+                        count={filteredVerifyRequests.length}
                         onPageChange={handlePageChange}
                         onRowsPerPageChange={handleLimitChange}
                         page={page}
