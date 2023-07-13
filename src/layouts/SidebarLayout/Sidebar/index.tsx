@@ -80,7 +80,7 @@ function Sidebar() {
         />
         <Box p={2}>
           <Button
-            href="https://bloomui.com"
+            href="http://localhost:3001/"
             target="_blank"
             rel="noopener noreferrer"
             variant="contained"
@@ -88,7 +88,7 @@ function Sidebar() {
             size="small"
             fullWidth
           >
-            Upgrade to PRO
+            스쿨메이트 바로가기
           </Button>
         </Box>
       </SidebarWrapper>

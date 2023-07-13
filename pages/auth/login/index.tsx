@@ -13,7 +13,7 @@ const Login: NextPage = ({ }) => {
     const handleLogin = async (id, password) => {
         try {
             await client.post('/admin/login', { id: id, password: password });
-            Router.push('/management/userVerify');
+            Router.push('/user/verify');
         } catch (error) {
             if (error instanceof AxiosError) {
                 Toast(error.response.data.message, 'error');
