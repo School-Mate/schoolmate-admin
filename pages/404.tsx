@@ -51,7 +51,7 @@ function Status404() {
   return (
     <>
       <Head>
-        <title>Status - 404</title>
+        <title>404</title>
       </Head>
       <MainContent>
         <TopWrapper>
@@ -59,7 +59,7 @@ function Status404() {
             <Box textAlign="center">
               <img alt="404" height={180} src="/static/images/status/404.svg" />
               <Typography variant="h2" sx={{ my: 2 }}>
-                The page you were looking for doesn't exist.
+                페이지를 찾을 수 없습니다.
               </Typography>
               <Typography
                 variant="h4"
@@ -67,33 +67,13 @@ function Status404() {
                 fontWeight="normal"
                 sx={{ mb: 4 }}
               >
-                It's on us, we moved the content to a different page. The search
-                below should help!
+                내
               </Typography>
             </Box>
             <Container maxWidth="sm">
               <Card sx={{ textAlign: 'center', mt: 3, p: 4 }}>
-                <FormControl variant="outlined" fullWidth>
-                  <OutlinedInputWrapper
-                    type="text"
-                    placeholder="Search terms here..."
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <ButtonSearch variant="contained" size="small">
-                          Search
-                        </ButtonSearch>
-                      </InputAdornment>
-                    }
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <SearchTwoToneIcon />
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-                <Divider sx={{ my: 4 }}>OR</Divider>
                 <Button href="/" variant="outlined">
-                  Go to homepage
+                  메인으로 돌아가기
                 </Button>
               </Card>
             </Container>
