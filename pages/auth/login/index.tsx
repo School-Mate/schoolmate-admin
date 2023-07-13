@@ -6,11 +6,7 @@ import { NextPage } from "next";
 import Router from 'next/router';
 import { useState } from "react";
 
-interface LoginProps {
-    redirectTo: string;
-}
-
-const Login: NextPage<LoginProps> = ({ }) => {
+const Login: NextPage = ({ }) => {
     const [id, setId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
