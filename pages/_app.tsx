@@ -13,6 +13,9 @@ import createEmotionCache from 'src/createEmotionCache';
 import { SidebarProvider } from 'src/contexts/SidebarContext';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -34,23 +37,26 @@ function TokyoApp(props: TokyoAppProps) {
   Router.events.on('routeChangeComplete', nProgress.done);
 
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>Tokyo Free White NextJS Typescript Admin Dashboard</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-      </Head>
-      <SidebarProvider>
-        <ThemeProvider>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <CssBaseline />
-            {getLayout(<Component {...pageProps} />)}
-          </LocalizationProvider>
-        </ThemeProvider>
-      </SidebarProvider>
-    </CacheProvider>
+    <>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>Tokyo Free White NextJS Typescript Admin Dashboard</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </Head>
+        <SidebarProvider>
+          <ThemeProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <CssBaseline />
+              {getLayout(<Component {...pageProps} />)}
+              <ToastContainer />
+            </LocalizationProvider>
+          </ThemeProvider>
+        </SidebarProvider>
+      </CacheProvider>
+    </>
   );
 }
 

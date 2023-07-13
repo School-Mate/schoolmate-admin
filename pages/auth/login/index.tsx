@@ -1,5 +1,7 @@
 import { client } from "@/utils/client";
+import Toast from "@/utils/toast";
 import { Button, Card, CardHeader, Container, TextField } from "@mui/material";
+import { AxiosError } from "axios";
 import { NextPage } from "next";
 import Router from 'next/router';
 import { useState } from "react";
@@ -8,14 +10,24 @@ interface LoginProps {
     redirectTo: string;
 }
 
-const Login: NextPage<LoginProps> = ({ redirectTo }) => {
+const Login: NextPage<LoginProps> = ({ }) => {
     const [id, setId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const handleLogin = (id, password) => {
-        client.post('/admin/login', { id: id, password: password });
-        Router.push('/admin');
-    }
+    const handleLogin = async (id, password) => {
+        try {
+            await client.post('/admin/login', { id: id, password: password });
+            Router.push('/management/userVerify');
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                Toast(error.response.data.message, 'error');
+                return;
+            } else {
+                Toast("알 수 없는 오류가 발생했습니다.", 'error');
+                return;
+            }
+        }
+    };
 
     return (
         <>
