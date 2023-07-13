@@ -16,7 +16,7 @@ const getProcessLabel = (verifyRequestProcess: Process): JSX.Element => {
             text: '거부됨',
             color: 'error'
         },
-        accepted: {
+        success: {
             text: '승인됨',
             color: 'success'
         },
@@ -82,7 +82,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
             name: '전체'
         },
         {
-            id: 'accepted',
+            id: 'success',
             name: '승인됨'
         },
         {
@@ -133,10 +133,11 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
     };
 
     const handleVerifyRequest = (userId: string, message: string, process: Process): void => {
-        client.post('/admin/verify', { userId: userId, message: message, process: process });
+        client.post('/admin/verify', { requestId: userId, message: message, process: process });
     }
 
-    const paginatedVerifyRequests = applyPagination(verifyRequests, page, limit);
+    const filteredVerifyRequests = applyFilters(verifyRequests, filters);
+    const paginatedVerifyRequests = applyPagination(filteredVerifyRequests, page, limit);
     const selectedSomeVerifyRequests =
         selectedVerifyRequests.length > 0 &&
         selectedVerifyRequests.length < verifyRequests.length;
@@ -161,6 +162,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
                                 <FormControl fullWidth variant="outlined">
                                     <InputLabel>상태</InputLabel>
                                     <Select
+                                        value={filters.process || 'pending'}
                                         onChange={handleStatusChange}
                                         label="Status"
                                         autoWidth
@@ -280,7 +282,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
                                                     color="inherit"
                                                     size="small"
                                                     onClick={() => {
-                                                        handleVerifyRequest(verifyRequest.userId, "승인되었습니다.", Process.accepted);
+                                                        handleVerifyRequest(verifyRequest.id, "승인되었습니다.", Process.success);
                                                     }}
                                                 >
                                                     <CheckCircleOutlineOutlinedIcon fontSize="medium" />
@@ -297,7 +299,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
                                                     color="inherit"
                                                     size="small"
                                                     onClick={() => {
-                                                        handleVerifyRequest(verifyRequest.userId, "거부되었습니다.", Process.denied);
+                                                        handleVerifyRequest(verifyRequest.id, "거부되었습니다.", Process.denied);
                                                     }}
                                                 >
                                                     <DoNotDisturbAltOutlinedIcon fontSize="medium" />

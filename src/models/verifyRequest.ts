@@ -1,12 +1,13 @@
-export type VerifyRequestStatus = 'accepted' | 'pending' | 'denied';
+export type VerifyRequestProcess = 'success' | 'pending' | 'denied';
 
 export enum Process {
     pending = 'pending',
-    accepted = 'accepted',
+    success = 'success',
     denied = 'denied',
 }
 
 export interface VerifyRequest {
+    id: string;
     userId: string;
     userName: string;
     imageId: string;
