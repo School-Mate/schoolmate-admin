@@ -9,7 +9,7 @@ interface ReportsProps {
 }
 
 const Reports: React.FC<ReportsProps> = ({ process }) => {
-    const { data: reportdatas } = useSWR<Report[]>(`/admin/report?process=${process}`, swrFetcher);
+    const { data: reportdatas } = useSWR<Report[]>(`/admin/report?process=${process}&targetType=user`, swrFetcher);
 
     return (
         <Card>
