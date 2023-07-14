@@ -9,7 +9,6 @@ import Head from "next/head";
 import { useState } from "react";
 
 function ManagementUserReport() {
-    const [process, setProcess] = useState<Process>(Process.pending)
     return (
         <>
             <Head>
@@ -27,7 +26,7 @@ function ManagementUserReport() {
                     spacing={3}
                 >
                     <Grid item xs={12}>
-                        <Reports process={process} />
+                        <Reports process={Process.pending} />
                     </Grid>
                 </Grid>
             </Container>
