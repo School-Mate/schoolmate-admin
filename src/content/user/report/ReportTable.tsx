@@ -1,8 +1,8 @@
 import Label from "@/components/Label";
-import { Process, Report, ReportTargetType } from "@/models/report"
+import { Process, Report } from "@/models/report"
 import { client } from "@/utils/client";
 import { useTheme } from "@emotion/react";
-import { Box, Button, Card, CardHeader, Divider, FormControl, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { Box, Button, Card, CardHeader, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
@@ -55,23 +55,6 @@ const applyFilters = (
     });
 };
 
-const handleRedirectButton = (report: Report): void => {
-    let url = '';
-    if (report.targetType === ReportTargetType.user) {
-        url = ``;
-    } else if (report.targetType === ReportTargetType.article) {
-        url = ``;
-    } else if (report.targetType === ReportTargetType.asked) {
-        url = ``;
-    } else if (report.targetType === ReportTargetType.comment) {
-        url = ``;
-    } else if (report.targetType === ReportTargetType.recomment) {
-        url = ``;
-    }
-
-    Router.push(url);
-}
-
 const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
     const [page, setPage] = useState<number>(0);
     const [limit, setLimit] = useState<number>(5);
@@ -119,6 +102,17 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
         client.post(`/admin/report?${reportId}`);
     };
 
+    const handleRedirectButton = (report: Report): void => {
+        let url = '';
+
+        Router.push(url);
+    }
+
+    const getTargetName = async (targetId: string): Promise<string> => {
+        const { data: targetData } = await client.get(`/admin/user/${targetId}`);
+        return targetData.data.name;
+    }
+
     const filteredReports = applyFilters(reports, filters);
     const paginatedReports = applyPagination(filteredReports, page, limit);
     const theme = useTheme();
@@ -165,7 +159,7 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
                                                 color="text.secondary"
                                                 noWrap
                                             >
-                                                타입: {report.targetType} | 신고자: {report.reportUserName}
+                                                대상 이름: {getTargetName(report.targetId)} | 신고자: {report.reportUserName}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
