@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react';
+import { useEffect, type ReactElement, type ReactNode } from 'react';
 
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
@@ -32,17 +32,21 @@ interface TokyoAppProps extends AppProps {
 
 function TokyoApp(props: TokyoAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { data: userData, isLoading: userIsLoading } = useSWR('/admin/me', swrFetcher);
   const getLayout = Component.getLayout ?? ((page) => page);
 
   Router.events.on('routeChangeStart', nProgress.start);
   Router.events.on('routeChangeError', nProgress.done);
   Router.events.on('routeChangeComplete', nProgress.done);
 
-  try {
-    useSWR(`/admin/me`, swrFetcher);
-  } catch (error) {
-    Router.push('/');
-  }
+  useEffect(() => {
+    if (!userIsLoading) {
+      if (!userData) {
+        Router.push('/');
+      }
+    }
+  }, [])
+
   return (
     <>
       <CacheProvider value={emotionCache}>
