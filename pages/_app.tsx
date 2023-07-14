@@ -32,7 +32,7 @@ interface TokyoAppProps extends AppProps {
 
 function TokyoApp(props: TokyoAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const { data: userData, isLoading: userIsLoading } = useSWR('/admin/me', swrFetcher);
+  const { data: userData, isLoading: userIsLoading, error: userError } = useSWR('/admin/me', swrFetcher);
   const getLayout = Component.getLayout ?? ((page) => page);
 
   Router.events.on('routeChangeStart', nProgress.start);
@@ -41,11 +41,11 @@ function TokyoApp(props: TokyoAppProps) {
 
   useEffect(() => {
     if (!userIsLoading) {
-      if (!userData) {
+      if (userError) {
         Router.push('/');
       }
     }
-  }, [])
+  }, [userError])
 
   return (
     <>
