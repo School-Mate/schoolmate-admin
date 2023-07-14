@@ -117,7 +117,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
         }
     ];
 
-    const handleProcessChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const handleFilterChange = (e: ChangeEvent<HTMLInputElement>): void => {
         let value = null;
 
         if (e.target.value !== 'all') {
@@ -190,7 +190,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
                                     <InputLabel>상태</InputLabel>
                                     <Select
                                         value={filters.process || 'all'}
-                                        onChange={handleProcessChange}
+                                        onChange={handleFilterChange}
                                         label="Status"
                                         autoWidth
                                     >
