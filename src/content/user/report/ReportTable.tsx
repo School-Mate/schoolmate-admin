@@ -1,10 +1,11 @@
 import Label from "@/components/Label";
-import { Process, Report } from "@/models/report"
+import { Process, Report, ReportTargetType } from "@/models/report"
 import { client } from "@/utils/client";
 import { useTheme } from "@emotion/react";
-import { Box, Card, CardHeader, Divider, FormControl, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Card, CardHeader, Divider, FormControl, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
 import PropTypes from "prop-types";
+import Router from "next/router";
 
 const getProcessLabel = (reportProcess: Process): JSX.Element => {
     const processMaps = {
@@ -53,6 +54,23 @@ const applyFilters = (
         return matches;
     });
 };
+
+const handleRedirectButton = (report: Report): void => {
+    let url = '';
+    if (report.targetType === ReportTargetType.user) {
+        url = ``;
+    } else if (report.targetType === ReportTargetType.article) {
+        url = ``;
+    } else if (report.targetType === ReportTargetType.asked) {
+        url = ``;
+    } else if (report.targetType === ReportTargetType.comment) {
+        url = ``;
+    } else if (report.targetType === ReportTargetType.recomment) {
+        url = ``;
+    }
+
+    Router.push(url);
+}
 
 const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
     const [page, setPage] = useState<number>(0);
@@ -122,6 +140,7 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
                                 <TableCell>사유</TableCell>
                                 <TableCell align="right">바로가기</TableCell>
                                 <TableCell align="right">상태</TableCell>
+                                <TableCell align="right">처리</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -139,8 +158,48 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
                                                 gutterBottom
                                                 noWrap
                                             >
-                                                신고자: {report.reportUserName}
+                                                대상: {report.targetId}
                                             </Typography>
+                                            <Typography
+                                                variant="body2"
+                                                color="text.secondary"
+                                                noWrap
+                                            >
+                                                타입: {report.targetType} | 신고자: {report.reportUserName}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography
+                                                variant="body1"
+                                                fontWeight="bold"
+                                                color="text.primary"
+                                                gutterBottom
+                                                noWrap
+                                            >
+                                                {report.message}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Button
+                                                variant="outlined"
+                                                onClick={() => {
+                                                    handleRedirectButton(report);
+                                                }}>
+                                                바로가기
+                                            </Button>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            {getProcessLabel(report.process)}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Button
+                                                variant="contained"
+                                                color="error"
+                                                onClick={() => {
+                                                    handleReportComplete(report.id);
+                                                }}>
+                                                완료
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 )
@@ -148,6 +207,17 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Box p={2}>
+                    <TablePagination
+                        component="div"
+                        count={filteredReports.length}
+                        onPageChange={handlePageChange}
+                        onRowsPerPageChange={handleLimitChange}
+                        page={page}
+                        rowsPerPage={limit}
+                        rowsPerPageOptions={[5, 10, 25]}
+                    />
+                </Box>
             </Card>
         </>
     );
