@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import PageTitleWrapper from "@/components/PageTitleWrapper";
 import PageHeader from "@/content/Dashboards/Crypto/PageHeader";
-import VerifyRequests from "@/content/Management/Transactions/VerifyRequests";
+import VerifyRequests from "@/content/user/verify/VerifyRequests";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { Process } from "@/models/verifyRequest";
 import { Container, Grid } from "@mui/material";
