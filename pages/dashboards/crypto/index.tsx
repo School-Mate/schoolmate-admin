@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import SidebarLayout from '@/layouts/SidebarLayout';
 
-import PageHeader from '@/content/Dashboards/Crypto/PageHeader';
+import PageHeader from '@/content/Dashboards/PageHeader';
 import PageTitleWrapper from '@/components/PageTitleWrapper';
 import { Container, Grid } from '@mui/material';
 import Footer from '@/components/Footer';

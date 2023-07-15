@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
 import PageTitleWrapper from "@/components/PageTitleWrapper";
-import PageHeader from "@/content/Dashboards/Crypto/PageHeader";
+import PageHeader from "@/content/Dashboards/PageHeader";
 import VerifyRequests from "@/content/user/verify/VerifyRequests";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { Process } from "@/models/verifyRequest";

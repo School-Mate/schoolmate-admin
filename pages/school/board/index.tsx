@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
 import PageTitleWrapper from "@/components/PageTitleWrapper";
-import PageHeader from "@/content/Dashboards/Crypto/PageHeader";
+import PageHeader from "@/content/Dashboards/PageHeader";
 import BoardRequests from "@/content/school/board/BoardRequests";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { Process } from "@/models/boardRequest";
