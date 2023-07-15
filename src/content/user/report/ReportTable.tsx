@@ -108,11 +108,6 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
         Router.push(url);
     }
 
-    const getTargetName = async (targetId: string): Promise<string> => {
-        const { data: targetData } = await client.get(`/admin/user/${targetId}`);
-        return targetData.data.name;
-    }
-
     const filteredReports = applyFilters(reports, filters);
     const paginatedReports = applyPagination(filteredReports, page, limit);
     const theme = useTheme();
@@ -159,7 +154,7 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
                                                 color="text.secondary"
                                                 noWrap
                                             >
-                                                대상 이름: {getTargetName(report.targetId)} | 신고자: {report.reportUserName}
+                                                신고자: {report.reportUserName}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
