@@ -78,7 +78,7 @@ const ImageDialog = (props) => {
     )
 }
 
-const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, reloadVerifyRequests: reloadVerfiyRequests }) => {
+const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, reloadVerifyRequests: reloadVerifyRequests }) => {
     const [selectedVerifyRequests, setSelectedVerifyRequests] = useState<string[]>([]);
     const selectedBulkActions = selectedVerifyRequests.length > 0;
     const [page, setPage] = useState<number>(0);
@@ -164,7 +164,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, rel
         try {
             await client.post('/admin/verify', { requestId: userId, message: message, process: process });
 
-            reloadVerfiyRequests()
+            reloadVerifyRequests()
         } catch {
             alert('오류가 발생했습니다.');
         }
