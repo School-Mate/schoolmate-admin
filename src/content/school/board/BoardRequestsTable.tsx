@@ -1,11 +1,12 @@
 import { BoardRequest, Process } from "@/models/boardRequest";
 import { client } from "@/utils/client";
-import { Box, Card, CardHeader, Checkbox, Divider, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip, Typography, useTheme } from "@mui/material";
+import { Box, Button, Card, CardHeader, Checkbox, Divider, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip, Typography, useTheme } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
 import BoardRequestBulkActions from "./BoardRequestBulkActions";
 import PropTypes from "prop-types";
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import DoNotDisturbAltOutlinedIcon from '@mui/icons-material/DoNotDisturbAltOutlined';
+import Router from "next/router";
 
 interface BoardRequestsTableProps {
     className?: string;
@@ -55,6 +56,10 @@ const BoardRequestsTable: FC<BoardRequestsTableProps> = ({ boardRequests }) => {
 
     const handleBoardRequest = (requestId: string, process: Process): void => {
         client.post('/admin/board', { requestId: requestId, process: process, message: '처리되었습니다.' });
+    }
+
+    const handleRedirectButton = (userId: string): void => {
+        Router.push(`/user/${userId}`);
     }
 
     const paginatedBoardRequests = applyPagination(boardRequests, page, limit);
@@ -144,15 +149,14 @@ const BoardRequestsTable: FC<BoardRequestsTableProps> = ({ boardRequests }) => {
                                             </Typography>
                                         </TableCell>
                                         <TableCell align="right">
-                                            <Typography
-                                                variant="body1"
-                                                fontWeight="bold"
-                                                color="text.primary"
-                                                gutterBottom
-                                                noWrap
+                                            <Button
+                                                variant="outlined"
+                                                onClick={() => {
+                                                    handleRedirectButton(boardRequest.userId);
+                                                }}
                                             >
-                                                {boardRequest.userId}
-                                            </Typography>
+                                                바로가기
+                                            </Button>
                                         </TableCell>
                                         <TableCell align="right">
                                             <Tooltip title="승인" arrow>
