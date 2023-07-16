@@ -3,6 +3,7 @@ import { swrFetcher } from "@/utils/client";
 import { Card } from "@mui/material";
 import useSWR from "swr";
 import ReportsTable from "./ReportTable";
+import { Report } from "@/models/report";
 
 interface ReportsProps {
     process: Process;
