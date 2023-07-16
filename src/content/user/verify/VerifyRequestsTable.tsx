@@ -34,6 +34,7 @@ const getProcessLabel = (verifyRequestProcess: Process): JSX.Element => {
 interface VerifyRequestsTableProps {
     className?: string;
     verifyRequests: VerifyRequest[];
+    reloadVerfiyRequests: () => void;
 }
 
 interface Filters {
@@ -77,7 +78,7 @@ const ImageDialog = (props) => {
     )
 }
 
-const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) => {
+const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, reloadVerfiyRequests }) => {
     const [selectedVerifyRequests, setSelectedVerifyRequests] = useState<string[]>([]);
     const selectedBulkActions = selectedVerifyRequests.length > 0;
     const [page, setPage] = useState<number>(0);
@@ -159,8 +160,14 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests }) =
         setLimit(parseInt(event.target.value));
     };
 
-    const handleVerifyRequest = (userId: string, message: string, process: Process): void => {
-        client.post('/admin/verify', { requestId: userId, message: message, process: process });
+    const handleVerifyRequest = async (userId: string, message: string, process: Process) => {
+        try {
+            await client.post('/admin/verify', { requestId: userId, message: message, process: process });
+
+            reloadVerfiyRequests()
+        } catch {
+            alert('오류가 발생했습니다.');
+        }
     }
 
     const filteredVerifyRequests = applyFilters(verifyRequests, filters);

@@ -9,13 +9,13 @@ interface VerifyRequestsProps {
 }
 
 const VerifyRequests: React.FC<VerifyRequestsProps> = ({ process }) => {
-    const { data: verifyRequestdatas } = useSWR<VerifyRequest[]>(`/admin/verify?process=${process}`, swrFetcher);
+    const { data: verifyRequestdatas, mutate: reloadVerfiy } = useSWR<VerifyRequest[]>(`/admin/verify?process=${process}`, swrFetcher);
 
 
     return (
         <Card>
             {verifyRequestdatas ?
-                <VerifyRequestsTable verifyRequests={verifyRequestdatas} /> : (<></>)
+                <VerifyRequestsTable verifyRequests={verifyRequestdatas} reloadVerfiyRequests={reloadVerfiy} /> : (<></>)
             }
         </Card>
     )
