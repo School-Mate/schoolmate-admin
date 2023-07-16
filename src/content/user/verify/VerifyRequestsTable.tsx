@@ -164,7 +164,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, rel
         try {
             await client.post('/admin/verify', { requestId: userId, message: message, process: process });
 
-            reloadVerifyRequests()
+            reloadVerifyRequests();
         } catch {
             alert('오류가 발생했습니다.');
         }
