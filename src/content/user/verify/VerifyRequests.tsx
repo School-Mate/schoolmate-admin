@@ -15,7 +15,7 @@ const VerifyRequests: React.FC<VerifyRequestsProps> = ({ process }) => {
     return (
         <Card>
             {verifyRequestdatas ?
-                <VerifyRequestsTable verifyRequests={verifyRequestdatas} reloadVerfiyRequests={reloadVerfiy} /> : (<></>)
+                <VerifyRequestsTable verifyRequests={verifyRequestdatas} reloadVerifyRequests={reloadVerfiy} /> : (<></>)
             }
         </Card>
     )

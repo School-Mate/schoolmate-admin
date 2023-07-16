@@ -34,7 +34,7 @@ const getProcessLabel = (verifyRequestProcess: Process): JSX.Element => {
 interface VerifyRequestsTableProps {
     className?: string;
     verifyRequests: VerifyRequest[];
-    reloadVerfiyRequests: () => void;
+    reloadVerifyRequests: () => void;
 }
 
 interface Filters {
@@ -78,7 +78,7 @@ const ImageDialog = (props) => {
     )
 }
 
-const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, reloadVerfiyRequests }) => {
+const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, reloadVerifyRequests: reloadVerfiyRequests }) => {
     const [selectedVerifyRequests, setSelectedVerifyRequests] = useState<string[]>([]);
     const selectedBulkActions = selectedVerifyRequests.length > 0;
     const [page, setPage] = useState<number>(0);
