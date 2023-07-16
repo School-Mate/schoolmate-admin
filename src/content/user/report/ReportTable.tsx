@@ -26,6 +26,7 @@ const getProcessLabel = (reportProcess: Process): JSX.Element => {
 interface ReportTableProps {
     className?: string;
     reports: Report[];
+    reloadReports: () => void;
 }
 
 interface Filters {
@@ -55,7 +56,7 @@ const applyFilters = (
     });
 };
 
-const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
+const ReportsTable: FC<ReportTableProps> = ({ reports, reloadReports: reloadReports }) => {
     const [page, setPage] = useState<number>(0);
     const [limit, setLimit] = useState<number>(5);
     const [filters, setFilters] = useState<Filters>({
@@ -98,12 +99,18 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
         setLimit(parseInt(e.target.value));
     };
 
-    const handleReportComplete = (reportId: string): void => {
-        client.post(`/admin/report?${reportId}`);
+    const handleReportComplete = async (reportId: string): Promise<void> => {
+        try {
+            await client.post(`/admin/report?reportId=${reportId}`);
+
+            reloadReports();
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    const handleRedirectButton = (report: Report): void => {
-        let url = '';
+    const handleRedirectButton = (userId: string): void => {
+        let url = `/user/${userId}`;
 
         Router.push(url);
     }
@@ -172,7 +179,7 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
                                             <Button
                                                 variant="outlined"
                                                 onClick={() => {
-                                                    handleRedirectButton(report);
+                                                    handleRedirectButton(report.targetId);
                                                 }}>
                                                 바로가기
                                             </Button>
@@ -181,14 +188,19 @@ const ReportsTable: FC<ReportTableProps> = ({ reports }) => {
                                             {getProcessLabel(report.process)}
                                         </TableCell>
                                         <TableCell align="right">
-                                            <Button
-                                                variant="contained"
-                                                color="error"
-                                                onClick={() => {
-                                                    handleReportComplete(report.id);
-                                                }}>
-                                                완료
-                                            </Button>
+                                            {
+                                                report.process === 'pending' &&
+                                                <>
+                                                    <Button
+                                                        variant="contained"
+                                                        color="error"
+                                                        onClick={() => {
+                                                            handleReportComplete(report.id);
+                                                        }}>
+                                                        완료
+                                                    </Button>
+                                                </>
+                                            }
                                         </TableCell>
                                     </TableRow>
                                 )

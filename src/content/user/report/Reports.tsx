@@ -10,12 +10,12 @@ interface ReportsProps {
 }
 
 const Reports: React.FC<ReportsProps> = ({ process }) => {
-    const { data: reportdatas } = useSWR<Report[]>(`/admin/report?process=${process}&targetType=user`, swrFetcher);
+    const { data: reportdatas, mutate: reloadReports } = useSWR<Report[]>(`/admin/report?process=${process}&targetType=user`, swrFetcher);
 
     return (
         <Card>
             {reportdatas ?
-                <ReportsTable reports={reportdatas} /> : (<></>)
+                <ReportsTable reports={reportdatas} reloadReports={reloadReports} /> : (<></>)
             }
         </Card>
     )
