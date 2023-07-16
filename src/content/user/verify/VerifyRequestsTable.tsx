@@ -305,40 +305,45 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, rel
                                             {getProcessLabel(verifyRequest.process)}
                                         </TableCell>
                                         <TableCell align="right">
-                                            <Tooltip title="승인" arrow>
-                                                <IconButton
-                                                    sx={{
-                                                        '&:hover': {
-                                                            backgroundColor: theme.colors.success.lighter
-                                                        },
-                                                        color: theme.colors.success.main
-                                                    }}
-                                                    color="inherit"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        handleVerifyRequest(verifyRequest.id, "승인되었습니다.", Process.success);
-                                                    }}
-                                                >
-                                                    <CheckCircleOutlineOutlinedIcon fontSize="medium" />
-                                                </IconButton>
-                                            </Tooltip>
-                                            <Tooltip title="거부" arrow>
-                                                <IconButton
-                                                    sx={{
-                                                        '&:hover': {
-                                                            backgroundColor: theme.colors.error.lighter
-                                                        },
-                                                        color: theme.colors.error.main
-                                                    }}
-                                                    color="inherit"
-                                                    size="small"
-                                                    onClick={() => {
-                                                        handleVerifyRequest(verifyRequest.id, "거부되었습니다.", Process.denied);
-                                                    }}
-                                                >
-                                                    <DoNotDisturbAltOutlinedIcon fontSize="medium" />
-                                                </IconButton>
-                                            </Tooltip>
+                                            {
+                                                verifyRequest.process === 'pending' &&
+                                                <>
+                                                    <Tooltip title="승인" arrow>
+                                                        <IconButton
+                                                            sx={{
+                                                                '&:hover': {
+                                                                    backgroundColor: theme.colors.success.lighter
+                                                                },
+                                                                color: theme.colors.success.main
+                                                            }}
+                                                            color="inherit"
+                                                            size="small"
+                                                            onClick={() => {
+                                                                handleVerifyRequest(verifyRequest.id, "승인되었습니다.", Process.success);
+                                                            }}
+                                                        >
+                                                            <CheckCircleOutlineOutlinedIcon fontSize="medium" />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                    <Tooltip title="거부" arrow>
+                                                        <IconButton
+                                                            sx={{
+                                                                '&:hover': {
+                                                                    backgroundColor: theme.colors.error.lighter
+                                                                },
+                                                                color: theme.colors.error.main
+                                                            }}
+                                                            color="inherit"
+                                                            size="small"
+                                                            onClick={() => {
+                                                                handleVerifyRequest(verifyRequest.id, "거부되었습니다.", Process.denied);
+                                                            }}
+                                                        >
+                                                            <DoNotDisturbAltOutlinedIcon fontSize="medium" />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </>
+                                            }
                                         </TableCell>
                                     </TableRow>
                                 );
