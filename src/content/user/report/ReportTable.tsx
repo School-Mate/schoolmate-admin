@@ -1,7 +1,6 @@
 import Label from "@/components/Label";
 import { Process, Report } from "@/models/report"
 import { client } from "@/utils/client";
-import { useTheme } from "@emotion/react";
 import { Box, Button, Card, CardHeader, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
 import PropTypes from "prop-types";
@@ -29,10 +28,6 @@ interface ReportTableProps {
     reloadReports: () => void;
 }
 
-interface Filters {
-    process?: Process;
-}
-
 const applyPagination = (
     reports: Report[],
     page: number,
@@ -41,55 +36,9 @@ const applyPagination = (
     return reports.slice(page * limit, page * limit + limit);
 };
 
-const applyFilters = (
-    reports: Report[],
-    filters: Filters
-): Report[] => {
-    return reports.filter((reports) => {
-        let matches = true;
-
-        if (filters.process && reports.process !== filters.process) {
-            matches = false;
-        }
-
-        return matches;
-    });
-};
-
 const ReportsTable: FC<ReportTableProps> = ({ reports, reloadReports: reloadReports }) => {
     const [page, setPage] = useState<number>(0);
     const [limit, setLimit] = useState<number>(5);
-    const [filters, setFilters] = useState<Filters>({
-        process: null
-    });
-
-    const processOptions = [
-        {
-            id: 'all',
-            name: '전체'
-        },
-        {
-            id: 'success',
-            name: '처리됨'
-        },
-        {
-            id: 'pending',
-            name: '처리 중'
-        }
-    ];
-
-    const handleFilterChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        let value = null;
-
-        if (e.target.value !== 'all') {
-            value = e.target.value;
-        }
-
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            [e.target.name]: value
-        }));
-    }
 
     const handlePageChange = (_event: unknown, newPage: number): void => {
         setPage(newPage);
@@ -115,9 +64,7 @@ const ReportsTable: FC<ReportTableProps> = ({ reports, reloadReports: reloadRepo
         Router.push(url);
     }
 
-    const filteredReports = applyFilters(reports, filters);
-    const paginatedReports = applyPagination(filteredReports, page, limit);
-    const theme = useTheme();
+    const paginatedReports = applyPagination(reports, page, limit);
 
     reports[0]
 
@@ -211,7 +158,7 @@ const ReportsTable: FC<ReportTableProps> = ({ reports, reloadReports: reloadRepo
                 <Box p={2}>
                     <TablePagination
                         component="div"
-                        count={filteredReports.length}
+                        count={reports.length}
                         onPageChange={handlePageChange}
                         onRowsPerPageChange={handleLimitChange}
                         page={page}
