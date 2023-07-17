@@ -1,5 +1,5 @@
 import { VerifyRequest } from "@/models/verifyRequest";
-import { Box, Button, Card, CardHeader, Checkbox, Dialog, Divider, FormControl, IconButton, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip, Typography, useTheme } from "@mui/material";
+import { Box, Button, Card, CardHeader, Checkbox, Dialog, Divider, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip, Typography, useTheme } from "@mui/material";
 import React, { ChangeEvent, FC, useState, } from "react";
 import RequestBulkActions from "./RequestBulkActions";
 import dayjs from "dayjs";
@@ -75,25 +75,6 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, rel
     const handleClose = () => {
         setOpen(false);
     };
-
-    const statusOptions = [
-        {
-            id: 'all',
-            name: '전체'
-        },
-        {
-            id: 'success',
-            name: '승인됨'
-        },
-        {
-            id: 'denied',
-            name: '거부됨'
-        },
-        {
-            id: 'pending',
-            name: '대기 중'
-        }
-    ];
 
     const handleSelectAllVerifyRequests = (
         event: ChangeEvent<HTMLInputElement>
