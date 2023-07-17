@@ -99,7 +99,7 @@ function Logo() {
 
   return (
     <TooltipWrapper
-      title="Tokyo Free White Next.js Typescript Admin Dashboard"
+      title="스쿨메이트 어드민 페이지"
       arrow
     >
       <LogoWrapper href="/">
@@ -113,12 +113,14 @@ function Logo() {
           }}
           overlap="circular"
           color="success"
-          badgeContent="1.0"
         >
           <LogoSignWrapper>
-            <LogoSign>
-              <LogoSignInner />
-            </LogoSign>
+            <img
+              src="/icon-512x512.png"
+              alt="Tokyo Free White logo"
+              width="52"
+              height="38"
+            />
           </LogoSignWrapper>
         </Badge>
       </LogoWrapper>
