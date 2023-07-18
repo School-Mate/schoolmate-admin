@@ -6,6 +6,8 @@ WORKDIR /app
 
 COPY . /app
 
+COPY .env .env.production.local
+
 RUN yarn
 ENV NODE_ENV production
 RUN yarn build
