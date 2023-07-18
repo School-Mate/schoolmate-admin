@@ -1,6 +1,4 @@
 import Footer from "@/components/Footer";
-import PageTitleWrapper from "@/components/PageTitleWrapper";
-import PageHeader from "@/content/Dashboards/PageHeader";
 import BoardRequests from "@/content/school/board/BoardRequests";
 import SidebarLayout from "@/layouts/SidebarLayout";
 import { Process } from "@/models/boardRequest";
@@ -13,10 +11,9 @@ function ManagementBoardRequest() {
             <Head>
                 <title>게시판 요청</title>
             </Head>
-            <PageTitleWrapper>
-                <PageHeader />
-            </PageTitleWrapper>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" style={{
+                paddingTop: '30px'
+            }}>
                 <Grid
                     container
                     direction="row"

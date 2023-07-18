@@ -57,9 +57,6 @@ function Header() {
         alignItems="center"
         spacing={2}
       />
-      <Box display="flex" alignItems="center">
-        <HeaderUserbox />
-      </Box>
     </HeaderWrapper>
   );
 }

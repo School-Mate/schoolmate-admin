@@ -18,6 +18,7 @@ export interface VerifyRequest {
     createdAt: Date;
     process: Process;
     image: Image
+    dept: string;
 }
 
 export interface Image {

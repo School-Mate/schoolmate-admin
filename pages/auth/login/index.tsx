@@ -2,11 +2,10 @@ import { client } from "@/utils/client";
 import Toast from "@/utils/toast";
 import { Button, Card, CardHeader, Container, TextField } from "@mui/material";
 import { AxiosError } from "axios";
-import { NextPage } from "next";
 import Router from 'next/router';
 import { useState } from "react";
 
-const Login: NextPage = ({ }) => {
+const Login = () => {
     const [id, setId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 

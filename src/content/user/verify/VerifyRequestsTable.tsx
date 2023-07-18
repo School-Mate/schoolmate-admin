@@ -204,7 +204,7 @@ const VerifyRequestsTable: FC<VerifyRequestsTableProps> = ({ verifyRequests, rel
                                                 color="text.secondary"
                                                 noWrap
                                             >
-                                                {verifyRequest.grade}학년 {verifyRequest.class}반
+                                                {verifyRequest.grade}학년 {verifyRequest.class}반 {verifyRequest.dept}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>

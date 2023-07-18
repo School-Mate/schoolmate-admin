@@ -66,8 +66,6 @@ const ReportsTable: FC<ReportTableProps> = ({ reports, reloadReports: reloadRepo
 
     const paginatedReports = applyPagination(reports, page, limit);
 
-    reports[0]
-
     return (
         <>
             <Card>
