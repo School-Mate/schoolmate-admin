@@ -1,4 +1,4 @@
-import { useEffect, type ReactElement, type ReactNode } from 'react';
+import { ReactElement, ReactNode, useEffect } from 'react';
 
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
@@ -61,7 +61,7 @@ function TokyoApp(props: TokyoAppProps) {
           <ThemeProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <CssBaseline />
-              {getLayout(<Component {...pageProps} />)}
+              {getLayout(<Component {...pageProps} /> as ReactElement)}
               <ToastContainer />
             </LocalizationProvider>
           </ThemeProvider>
