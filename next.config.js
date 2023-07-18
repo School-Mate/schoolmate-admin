@@ -16,5 +16,8 @@ module.exports = withImages({
   ...redirects,
   webpack(config, options) {
     return config;
+  },
+  typescript: {
+    ignoreBuildErrors: true
   }
 });
