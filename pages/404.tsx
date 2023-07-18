@@ -3,15 +3,10 @@ import {
   Card,
   Typography,
   Container,
-  Divider,
   Button,
-  FormControl,
-  OutlinedInput,
-  InputAdornment,
   styled
 } from '@mui/material';
 import Head from 'next/head';
-import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
 import type { ReactElement } from 'react';
 import BaseLayout from 'src/layouts/BaseLayout';
 
@@ -32,18 +27,6 @@ const TopWrapper = styled(Box)(
   align-items: center;
   justify-content: center;
   padding: ${theme.spacing(6)};
-`
-);
-
-const OutlinedInputWrapper = styled(OutlinedInput)(
-  ({ theme }) => `
-    background-color: ${theme.colors.alpha.white[100]};
-`
-);
-
-const ButtonSearch = styled(Button)(
-  ({ theme }) => `
-    margin-right: -${theme.spacing(1)};
 `
 );
 

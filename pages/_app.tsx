@@ -32,7 +32,7 @@ interface TokyoAppProps extends AppProps {
 
 function TokyoApp(props: TokyoAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const { data: userData, isLoading: userIsLoading, error: userError } = useSWR('/admin/me', swrFetcher);
+  const { isLoading: userIsLoading, error: userError } = useSWR('/admin/me', swrFetcher);
   const getLayout = Component.getLayout ?? ((page) => page);
 
   Router.events.on('routeChangeStart', nProgress.start);
