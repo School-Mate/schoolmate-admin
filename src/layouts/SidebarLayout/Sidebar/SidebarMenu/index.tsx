@@ -272,6 +272,34 @@ function SidebarMenu() {
             </List>
           </SubMenuWrapper>
         </List>
+        <List
+          component="div"
+          subheader={
+            <ListSubheader component="div" disableSticky>
+              게시글 관리
+            </ListSubheader>
+          }
+        >
+          <SubMenuWrapper>
+            <List component="div">
+              <ListItem component="div">
+                <NextLink href="/article/all" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/article/all' ? 'active' : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<BallotTwoToneIcon />}
+                  >
+                    전체 게시글
+                  </Button>
+                </NextLink>
+              </ListItem>
+            </List>
+          </SubMenuWrapper>
+        </List>
       </MenuWrapper>
     </>
   );
