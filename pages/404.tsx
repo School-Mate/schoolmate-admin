@@ -55,7 +55,7 @@ function Status404() {
             </Box>
             <Container maxWidth="sm">
               <Card sx={{ textAlign: 'center', mt: 3, p: 4 }}>
-                <Button href="/" variant="outlined">
+                <Button href="/user/all" variant="outlined">
                   메인으로 돌아가기
                 </Button>
               </Card>
