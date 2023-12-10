@@ -2548,10 +2548,10 @@ schema-utils@^3.0.0:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-schoolmate-types@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/schoolmate-types/-/schoolmate-types-1.0.12.tgz#0c55134b53816161e9824e3d3ad63badf80826f3"
-  integrity sha512-QWxEqA5ORGqCKeztZKb9ZUeITAg7ckESM46Kn5ZCVmaPUM2Hye6Q5jp47XoA8Ns3DCGI82w/EXu0Akh/xliBnw==
+schoolmate-types@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/schoolmate-types/-/schoolmate-types-1.0.13.tgz#d5fde5226497a962b39a6ca90ee2183bc25f53ac"
+  integrity sha512-09yo+mHigFwixsKw7dV78REJf46nsds7NcZ43dY0h1ssPGKeAJz1cMFmdlR49TkFaj8DfraiHc1UVuUhBq2q/A==
 
 semver@^6.3.0:
   version "6.3.1"
