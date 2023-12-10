@@ -17,6 +17,7 @@ import FlagTwoToneIcon from '@mui/icons-material/FlagTwoTone';
 import ReportProblemTwoToneIcon from '@mui/icons-material/ReportProblemTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
+import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -178,6 +179,21 @@ function SidebarMenu() {
         >
           <SubMenuWrapper>
             <List component="div">
+              <ListItem component="div">
+                <NextLink href="/user/all" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/user/all' ? 'active' : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<BallotTwoToneIcon />}
+                  >
+                    전체 유저 목록
+                  </Button>
+                </NextLink>
+              </ListItem>
               <ListItem component="div">
                 <NextLink href="/user/verify" passHref>
                   <Button
