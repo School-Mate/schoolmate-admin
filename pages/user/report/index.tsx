@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
 import Reports from '@/content/user/report/Reports';
 import SidebarLayout from '@/layouts/SidebarLayout';
-import { Process } from '@/models/report';
+import { Process } from 'schoolmate-types';
 import { Container, Grid } from '@mui/material';
 import Head from 'next/head';
 
