@@ -18,6 +18,7 @@ import ReportProblemTwoToneIcon from '@mui/icons-material/ReportProblemTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
+import DriveFolderUploadTwoToneIcon from '@mui/icons-material/DriveFolderUploadTwoTone';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -238,6 +239,21 @@ function SidebarMenu() {
           <SubMenuWrapper>
             <List component="div">
               <ListItem component="div">
+                <NextLink href="/school/all" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/school/all' ? 'active' : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<BallotTwoToneIcon />}
+                  >
+                    전체 학교 목록
+                  </Button>
+                </NextLink>
+              </ListItem>
+              <ListItem component="div">
                 <NextLink href="/school/board" passHref>
                   <Button
                     className={
@@ -249,23 +265,6 @@ function SidebarMenu() {
                     startIcon={<TableChartTwoToneIcon />}
                   >
                     게시판 생성 요청
-                  </Button>
-                </NextLink>
-              </ListItem>
-              <ListItem component="div">
-                <NextLink href="/school/report" passHref>
-                  <Button
-                    className={
-                      currentRoute === '/school/report'
-                        ? 'active'
-                        : ''
-                    }
-                    disableRipple
-                    component="a"
-                    onClick={closeSidebar}
-                    startIcon={<FlagTwoToneIcon />}
-                  >
-                    게시글 신고
                   </Button>
                 </NextLink>
               </ListItem>
@@ -294,6 +293,66 @@ function SidebarMenu() {
                     startIcon={<BallotTwoToneIcon />}
                   >
                     전체 게시글
+                  </Button>
+                </NextLink>
+              </ListItem>
+              <ListItem component="div">
+                <NextLink href="/school/report" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/school/report'
+                        ? 'active'
+                        : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<FlagTwoToneIcon />}
+                  >
+                    게시글 신고
+                  </Button>
+                </NextLink>
+              </ListItem>
+            </List>
+          </SubMenuWrapper>
+        </List>
+        <List
+          component="div"
+          subheader={
+            <ListSubheader component="div" disableSticky>
+              광고 관리
+            </ListSubheader>
+          }
+        >
+          <SubMenuWrapper>
+            <List component="div">
+              <ListItem component="div">
+                <NextLink href="/ad/all" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/ad/all' ? 'active' : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<BallotTwoToneIcon />}
+                  >
+                    광고 목록
+                  </Button>
+                </NextLink>
+              </ListItem>
+              <ListItem component="div">
+                <NextLink href="/ad/add" passHref>
+                  <Button
+                    className={
+                      currentRoute === '/ad/add' ? 'active' : ''
+                    }
+                    disableRipple
+                    component="a"
+                    onClick={closeSidebar}
+                    startIcon={<DriveFolderUploadTwoToneIcon />}
+                  >
+                    광고 추가
                   </Button>
                 </NextLink>
               </ListItem>
