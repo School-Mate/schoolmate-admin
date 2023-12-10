@@ -1,10 +1,10 @@
 import Label from "@/components/Label";
-import { Process, Report } from "@/models/report"
 import { client } from "@/utils/client";
 import { Box, Button, Card, CardHeader, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
+import { Report, Process } from "schoolmate-types";
 
 const getProcessLabel = (reportProcess: Process): JSX.Element => {
     const processMaps = {

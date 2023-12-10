@@ -1,9 +1,8 @@
-import { Process } from "@/models/report";
 import { swrFetcher } from "@/utils/client";
 import { Card } from "@mui/material";
 import useSWR from "swr";
 import ReportsTable from "./ReportTable";
-import { Report } from "@/models/report";
+import { Report, Process } from "schoolmate-types"
 
 interface ReportsProps {
     process: Process;
