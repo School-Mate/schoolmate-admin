@@ -1,5 +1,4 @@
 import Footer from '@/components/Footer';
-import PageTitleWrapper from '@/components/PageTitleWrapper';
 import Info from '@/content/user/info/Info';
 import SidebarLayout from '@/layouts/SidebarLayout';
 import { Card, Container, Grid } from '@mui/material';
@@ -8,7 +7,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Status404 from 'pages/404';
 
-const UserInfo: NextPage = ({}) => {
+const UserInfo: NextPage = ({ }) => {
   const router = useRouter();
   const userId = router.query.id;
   if (!userId) {
