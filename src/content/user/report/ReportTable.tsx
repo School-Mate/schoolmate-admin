@@ -4,6 +4,7 @@ import { Box, Button, Card, CardHeader, Divider, Table, TableBody, TableCell, Ta
 import { ChangeEvent, FC, useState } from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
+import dayjs from "dayjs";
 import { Report, Process } from "schoolmate-types";
 
 const getProcessLabel = (reportProcess: Process): JSX.Element => {
@@ -79,6 +80,7 @@ const ReportsTable: FC<ReportTableProps> = ({ reports, reloadReports: reloadRepo
                             <TableRow>
                                 <TableCell>정보</TableCell>
                                 <TableCell>사유</TableCell>
+                                <TableCell>생성 일자</TableCell>
                                 <TableCell align="right">바로가기</TableCell>
                                 <TableCell align="right">상태</TableCell>
                                 <TableCell align="right">처리</TableCell>
@@ -118,6 +120,17 @@ const ReportsTable: FC<ReportTableProps> = ({ reports, reloadReports: reloadRepo
                                                 noWrap
                                             >
                                                 {report.message}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography
+                                                variant="body1"
+                                                fontWeight="bold"
+                                                color="text.primary"
+                                                gutterBottom
+                                                noWrap
+                                            >
+                                                {dayjs(report.createdAt).format('YYYY-MM-DD HH:mm:ss')}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align="right">
