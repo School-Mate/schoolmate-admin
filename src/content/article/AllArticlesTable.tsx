@@ -145,7 +145,7 @@ const AllArticlesTable: FC<AllArticlesTableProps> = ({ allArticles, reloadArticl
                                         <Button
                                             variant="outlined"
                                             onClick={() => handleRedirectButton(article.user.id)}>
-                                            {article.user.name}
+                                            {article.user.name}{article.isAnonymous ? "(익명)" : ""}
                                         </Button>
                                     </TableCell>
                                     <TableCell align="right">
