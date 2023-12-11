@@ -1,4 +1,4 @@
-import { Box, Button, Card, Container, Dialog, Link, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, useTheme } from "@mui/material";
+import { Box, Button, Card, Container, Dialog, Link, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import { FC, useState } from "react";
 import { ArticleWithUser } from "types/article";
 import PropTypes from 'prop-types';
