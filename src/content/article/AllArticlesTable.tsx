@@ -10,6 +10,12 @@ interface AllArticlesTableProps {
     reloadArticles: () => void;
 }
 
+interface ImageDialogProps {
+    onClose: () => void;
+    open: boolean;
+    images: Array<string>;
+}
+
 const applyPagination = (articles: ArticleWithUser[], page: number, limit: number) => {
     return articles.slice(page * limit, page * limit + limit);
 }
@@ -64,7 +70,7 @@ const AllArticlesTable: FC<AllArticlesTableProps> = ({ allArticles, reloadArticl
 
     const paginatedAllArticles = applyPagination(allArticles, page, limit);
 
-    const ImageDialog = (props) => {
+    const ImageDialog = (props: ImageDialogProps) => {
         const { onClose, images, open } = props;
         const handleClose = () => {
             onClose();
@@ -75,9 +81,9 @@ const AllArticlesTable: FC<AllArticlesTableProps> = ({ allArticles, reloadArticl
                 <Container>
                     <Box>
                         {
-                            images ?
+                            images.length > 0 ?
                                 images.map((image) => (
-                                    <img src={process.env.NEXT_PUBLIC_API_URL + '/' + image} />
+                                    <img src={process.env.NEXT_PUBLIC_S3_URL + image} />
                                 )) : (<h1>이미지 없음</h1>)
                         }
                     </Box>
@@ -112,7 +118,7 @@ const AllArticlesTable: FC<AllArticlesTableProps> = ({ allArticles, reloadArticl
                         <TableHead>
                             <TableRow>
                                 <TableCell>id</TableCell>
-                                <TableCell>게시판</TableCell>
+                                <TableCell>정보</TableCell>
                                 <TableCell>작성자</TableCell>
                                 <TableCell align="right">내용</TableCell>
                                 <TableCell align="right">이미지</TableCell>
@@ -133,7 +139,7 @@ const AllArticlesTable: FC<AllArticlesTableProps> = ({ allArticles, reloadArticl
                                         </Link>
                                     </TableCell>
                                     <TableCell>
-                                        {article.schoolId}-{article.board.name}
+                                        {article.board.name}: {article.title}
                                     </TableCell>
                                     <TableCell>
                                         <Button
@@ -186,7 +192,7 @@ const AllArticlesTable: FC<AllArticlesTableProps> = ({ allArticles, reloadArticl
             <ImageDialog
                 open={imageOpen}
                 onClose={handleImageClose}
-                image={targetImages}
+                images={targetImages}
             />
 
             <ContentDialog
