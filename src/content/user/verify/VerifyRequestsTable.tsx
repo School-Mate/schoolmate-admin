@@ -54,7 +54,7 @@ const ImageDialog = (props) => {
 
     return (
         <Dialog onClose={handleClose} open={open}>
-            <img src={process.env.NEXT_PUBLIC_S3_URL + '/' + image} />
+            <img src={process.env.NEXT_PUBLIC_S3_URL + image} />
         </Dialog>
     )
 }
