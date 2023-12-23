@@ -8,7 +8,7 @@ import { AxiosError } from "axios";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { useState } from "react";
-import { BoardRequest, School, User } from "schoolmate-types";
+import { BoardRequest, Process, School, User } from "schoolmate-types";
 
 const BoardRequestListTable = ({
   boards,
@@ -24,7 +24,9 @@ const BoardRequestListTable = ({
 
     try {
       await fetcher.post(`/admin/boardrequest`, {
-        name: name,
+        message: denyReason,
+        requestId: selectRequestId,
+        process: "denied",
       });
 
       alert("게시판 생성 요청이 거절되었습니다.");
@@ -32,6 +34,28 @@ const BoardRequestListTable = ({
       setModal(false);
       setSelectRequestId("");
       setDenyReason("");
+    } catch (e: any | AxiosError) {
+      if (e instanceof AxiosError) {
+        alert(e.response?.data.message);
+      } else {
+        alert(e.message);
+      }
+    }
+  };
+
+  const handleBoardAccept = async () => {
+    if (!selectRequestId) return alert("요청 ID를 선택해주세요.");
+
+    try {
+      await fetcher.post(`/admin/boardrequest`, {
+        requestId: selectRequestId,
+        process: "success",
+      });
+
+      alert("게시판 생성 요청이 승인되었습니다.");
+
+      setModal(false);
+      setSelectRequestId("");
     } catch (e: any | AxiosError) {
       if (e instanceof AxiosError) {
         alert(e.response?.data.message);
@@ -89,10 +113,16 @@ const BoardRequestListTable = ({
                     className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
                       board.process === "pending"
                         ? "text-warning bg-warning"
+                        : board.process === "denied"
+                        ? "text-danger bg-danger"
                         : "text-success bg-success"
                     }`}
                   >
-                    {board.process === "pending" ? "승인 대기" : "승인 완료"}
+                    {board.process === "pending"
+                      ? "승인 대기"
+                      : board.process === "denied"
+                      ? "거절됨"
+                      : "승인됨"}
                   </p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
@@ -108,14 +138,36 @@ const BoardRequestListTable = ({
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <div className="flex items-center space-x-3.5">
-                    <button
-                      className="hover:text-primary"
-                      onClick={() => {
-                        setModal(true);
-                      }}
-                    >
-                      <i className="fas fa-edit" />
-                    </button>
+                    {board.process === "pending" ? (
+                      <>
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => {
+                            setModal(true);
+                            setSelectRequestId(board.id);
+                          }}
+                        >
+                          <i className="text-base text-gray-4 fas fa-times" />
+                        </button>
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => {
+                            setSelectRequestId(board.id);
+                            handleBoardAccept();
+                          }}
+                        >
+                          <i className="text-base text-gray-4 fas fa-check" />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <p
+                          className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium text-success bg-success`}
+                        >
+                          처리 완료
+                        </p>
+                      </>
+                    )}
                   </div>
                 </td>
               </tr>
