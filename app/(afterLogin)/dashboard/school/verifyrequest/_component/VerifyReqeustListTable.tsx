@@ -142,19 +142,18 @@ const BoardRequestListTable = ({
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <p
-                    className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
-                      verify.process === "pending"
-                        ? "text-warning bg-warning"
-                        : verify.process === "denied"
+                    className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${verify.process === "pending"
+                      ? "text-warning bg-warning"
+                      : verify.process === "denied"
                         ? "text-danger bg-danger"
                         : "text-success bg-success"
-                    }`}
+                      }`}
                   >
                     {verify.process === "pending"
                       ? "승인 대기"
                       : verify.process === "denied"
-                      ? "거절됨"
-                      : "승인됨"}
+                        ? "거절됨"
+                        : "승인됨"}
                   </p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
