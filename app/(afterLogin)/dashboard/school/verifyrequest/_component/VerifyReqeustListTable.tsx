@@ -75,6 +75,7 @@ const BoardRequestListTable = ({
       await fetcher.post(`/admin/verify`, {
         requestId: requestId,
         process: "success",
+        message: "승인되었습니다.",
       });
 
       alert("학교 인증 요청이 승인되었습니다.");
