@@ -6,11 +6,12 @@ import { useState } from "react";
 import { Report } from "schoolmate-types";
 import useSWR from "swr";
 import ReportListTable from "./_component/ReportListTable";
+import { ReportWithTarget } from "@/types/report";
 
 const UserReportPage = () => {
   const [page, setPage] = useState(1);
   const { data: reportDatas, isLoading } = useSWR<{
-    contents: Array<Report>;
+    contents: Array<ReportWithTarget>;
     totalPage: number;
   }>(`/admin/report?process=pending&page=${page}`, swrFetcher);
 
@@ -50,6 +51,6 @@ const UserReportPage = () => {
       </div>
     </>
   );
-}
+};
 
 export default UserReportPage;

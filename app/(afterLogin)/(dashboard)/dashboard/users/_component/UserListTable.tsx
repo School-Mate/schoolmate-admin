@@ -18,7 +18,6 @@ const UserListTable = ({
     }
   >;
 }) => {
-  console.log(users);
   return (
     <>
       <div className="max-w-full overflow-x-auto">
@@ -56,8 +55,9 @@ const UserListTable = ({
                     <p className="text-sm">
                       {user.userSchool ? (
                         <>
-                          {user.userSchool.school.defaultName} (
-                          {user.userSchool.school.name})
+                          {user.userSchool.school.defaultName}{" "}
+                          {user.userSchool.school.name &&
+                            `(${user.userSchool.school.name})`}
                         </>
                       ) : (
                         "학교 없음"
