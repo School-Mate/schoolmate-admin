@@ -84,12 +84,18 @@ const UserListTable = ({
                     {user.email}
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                    <Link
-                      href={`/dashboard/users/${user.id}`}
+                    <button
                       className="flex flex-row items-center"
+                      onClick={() => {
+                        window.open(
+                          `/user/${user.id}`,
+                          "popup",
+                          "width=600,height=600"
+                        );
+                      }}
                     >
                       <i className="text-sm text-gray-4 fas fa-external-link-alt" />
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               ))}

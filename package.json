@@ -32,6 +32,6 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "schoolmate-types": "^1.0.19"
+    "schoolmate-types": "1.0.20"
   }
 }

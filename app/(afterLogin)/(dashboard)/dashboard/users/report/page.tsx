@@ -10,7 +10,11 @@ import { ReportWithTarget } from "@/types/report";
 
 const UserReportPage = () => {
   const [page, setPage] = useState(1);
-  const { data: reportDatas, isLoading } = useSWR<{
+  const {
+    data: reportDatas,
+    isLoading,
+    mutate,
+  } = useSWR<{
     contents: Array<ReportWithTarget>;
     totalPage: number;
   }>(`/admin/report?process=pending&page=${page}`, swrFetcher);
@@ -22,7 +26,10 @@ const UserReportPage = () => {
           <SmallLoader />
         ) : (
           <>
-            <ReportListTable reports={reportDatas.contents} />
+            <ReportListTable
+              reports={reportDatas.contents}
+              updateReport={mutate}
+            />
             <div className="flex justify-center mt-8 mb-4">
               <div className="flex items-center justify-center gap-1">
                 <button

@@ -27,8 +27,16 @@ export const reportStatusMap: {
   success: "처리완료",
 };
 
+export type ReportTargetTypes = {
+  user: User;
+  article: Article;
+  comment: Comment;
+  recomment: ReComment;
+  asked: Asked;
+};
+
 export interface ReportWithTarget extends Report {
-  target: User | Article | Comment | ReComment | Asked;
+  target: any;
   reportUser: User;
   targetUser: User;
 }

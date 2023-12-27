@@ -142,18 +142,19 @@ const BoardRequestListTable = ({
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <p
-                    className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${verify.process === "pending"
-                      ? "text-warning bg-warning"
-                      : verify.process === "denied"
+                    className={`inline-flex rounded-full bg-opacity-10 py-1 px-3 text-sm font-medium ${
+                      verify.process === "pending"
+                        ? "text-warning bg-warning"
+                        : verify.process === "denied"
                         ? "text-danger bg-danger"
                         : "text-success bg-success"
-                      }`}
+                    }`}
                   >
                     {verify.process === "pending"
                       ? "승인 대기"
                       : verify.process === "denied"
-                        ? "거절됨"
-                        : "승인됨"}
+                      ? "거절됨"
+                      : "승인됨"}
                   </p>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
@@ -169,15 +170,21 @@ const BoardRequestListTable = ({
                   />
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  <Link
-                    href={`/dashboard/users/${verify.user.id}`}
+                  <button
                     className="flex flex-row items-center"
+                    onClick={() => {
+                      window.open(
+                        `/user/${verify.user.id}`,
+                        "popup",
+                        "width=600,height=600"
+                      );
+                    }}
                   >
                     <p className="text-black dark:text-white mr-2">
                       {verify.user.name}
                     </p>
                     <i className="text-sm text-gray-4 fas fa-external-link-alt" />
-                  </Link>
+                  </button>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <div className="flex items-center space-x-3.5">
